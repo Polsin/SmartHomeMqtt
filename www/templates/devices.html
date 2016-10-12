@@ -10,7 +10,11 @@
 <!-- <img src="img/0.png" class="figures"/> -->
 
 <ion-content>
-  <ion-toggle ng-model=value ng-change="togglePowerSW()" toggle-class="toggle-positive">Power</ion-toggle>
+  <ion-toggle ng-model=powerToggle ng-change="togglePowerSW()" ng-checked="false" toggle-class="toggle-green">Power</ion-toggle>
+
+
+
+
 <!--
   <label class="toggle">
      <input type="checkbox">
@@ -47,7 +51,7 @@
     <div class="item range range-assertive" ng-repeat="device in devices | filter:'thermostat'">
         <i class="icon ion-ios7-sunny-outline"></i>
         {{ device.name }}
-        <input type="range" snaps="true" name="volume" min="15" max="31" ng-model="device.value"  ng-change="change(device)">
+        <input type="range" snaps="true" name="volume" min="15" max="30" ng-model="device.value"  ng-change="change(device)">
         <i class="icon ion-ios7-sunny"></i>
         {{ device.value }}
     </div>
@@ -64,7 +68,7 @@
 -->
 
     <div class="button-bar button_center">
-      <a class="button button-positive">Mode</a>
+      <a class="button button-positive" ng-click="modeSW()">Mode</a>
       <a class="button button-positive">Fan</a>
       <a class="button button-positive" ng-click="powerSW()">Power</a>
     </div>

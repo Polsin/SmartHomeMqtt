@@ -6,14 +6,14 @@ angular.module('homepi.device', [])
 .controller('DeviceListCtrl', function($scope, $state, $rootScope, $stateParams, Socket) {
 
 $scope.togglePowerSW = function() {
-    if($scope.value == true) {
-      $scope.value = false;
+    if($scope.powerToggle == true) {
+      $scope.powerToggle = false;
     }else{
-      $scope.value = true;
+      $scope.powerToggle = true;
     }
-    console.log('testToggle changed to '+$scope.value);
+    console.log('testToggle changed to '+$scope.powerToggle);
 
-    if($scope.value){
+    if($scope.powerToggle){
         Socket.publish('/query/device/18FE34DAF3F1/app/AABBCCDDEEFF','<18FE34DAF3F1FF00010201010001F3>');
         console.log('sent = <18FE34DAF3F1FF00010201010001F3>');
         $scope.txDataSend.data = 'sent = '+'<18FE34DAF3F1FF00010201010001F3>';
@@ -24,14 +24,17 @@ $scope.togglePowerSW = function() {
    }
 };
 
-$scope.powerSW = function() {
-                if($scope.txReady){
-                    $scope.txReady=0;
-                    Socket.publish('/query/device/18FE34DAF3F1/app/AABBCCDDEEFF','<18FE34DAF3F1FF00010201010000F4>');
-                    console.log('sent = <18FE34DAF3F1FF00010201010000F4>');
-                    $scope.txDataSend.data = 'sent = '+'<18FE34DAF3F1FF00010201010000F4>';
-                }
-              };
+$scope.modeSW = function() {
+
+
+};
+
+$scope.fanSW = function() {
+
+
+};
+
+
 
   $scope.txtName = $stateParams.uname; // room name
   $scope.txtMcaddr = $stateParams.mcaddr; // mac address
@@ -50,7 +53,7 @@ $scope.powerSW = function() {
       //{type:"dimmer", value:0,name:$scope.devicemac,topic:"/query/device/"+$scope.devicemac+"/app/"+$scope.appmac,id:"dimmer"}, //1
       //{type:"dimmer", value:0,name:"Status",topic:"/query/device/"+$scope.devicemac+"/app/"+$scope.appmac,id:"dimmer_read"}, //2
       {type:"thermostat", value:25,name:$scope.devicemac2,topic:"/query/device/"+$scope.devicemac2+"/app/"+$scope.appmac,id:"thermostat"}, //3
-      {type:"notshow_thermo_stat", value:25,name:"Status",topic:"/query/device/"+$scope.devicemac2+"/app/"+$scope.appmac,id:"thermo_read"} //4
+      {type:"thermostat", value:25,name:"Status",topic:"/query/device/"+$scope.devicemac2+"/app/"+$scope.appmac,id:"thermo_read"} //4
                    ];
 
   console.log("device : " + window.localStorage['devicemac2']);
@@ -121,9 +124,9 @@ $scope.powerSW = function() {
         $scope.hexString1 = ("0" + $scope.hexString1).slice(-2);
 
         var power = 1;
-        if(device.value==31){
-            power = 0;
-        }
+        //if($scope.powerToggle == false){
+        //power = 0 ;
+        //}
         $scope.hexString2 = power.toString(16).toUpperCase();
         $scope.hexString2 = ("0" + $scope.hexString2).slice(-2);
 
@@ -251,9 +254,9 @@ $scope.powerSW = function() {
               var acMode = parseInt(payload.substring(43, 45),16);
               var FAN = ["Auto","High","Med","Low"];
               var MODE = ["Fan","Cool","Dry","Heat","Auto"];
-              if(power==0){
-                  setTemp = 31;
-              }
+              //if(power==1){
+              //$scope.powerToggle = true
+              //}
               $scope.devices[1].value = setTemp;
               $scope.devices[1].name = "[rssi="+rssi+"] [Room="+roomTemp+"] [Fan="+FAN[fanSpeed]+"] [Mode="+MODE[acMode]+"]";
               //console.log("Room Temp : " + roomTemp);
@@ -279,9 +282,9 @@ $scope.powerSW = function() {
               var acMode = parseInt(payload.substring(43, 45),16);
               var FAN = ["Auto","High","Med","Low"];
               var MODE = ["Fan","Cool","Dry","Heat","Auto"];
-              if(power==0){
-                  setTemp = 31;
-              }
+              //if(power==1){
+              //$scope.powerToggle = true
+              //}
               $scope.devices[1].value = setTemp;
               $scope.devices[1].name = "[rssi="+rssi+"] [Room="+roomTemp+"] [Fan="+FAN[fanSpeed]+"] [Mode="+MODE[acMode]+"]";
               console.log("Set Temp : " + setTemp);
@@ -291,7 +294,15 @@ $scope.powerSW = function() {
               document.getElementById('setTemp').innerHTML = setTemp;
               document.getElementById('setMode').innerHTML = FAN[fanSpeed];
               document.getElementById('setFan').innerHTML = MODE[acMode];
-              document.getElementById('setPower').innerHTML = 0;
+
+              if(power==1){
+              document.getElementById('setPower').innerHTML = "Power On";
+              $scope.powerToggle = true;
+              } else {
+              document.getElementById('setPower').innerHTML = "Power Off";
+              $scope.powerToggle = false;
+              }
+
 
 
               //var strTemp = roomTemp;
