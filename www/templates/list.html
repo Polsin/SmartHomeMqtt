@@ -1,0 +1,29 @@
+<ion-header-bar align-title="center" class="bar-dark">
+
+   <div class="buttons">
+    <button class="button icon ion-chevron-left" ng-click="btnSetting()">Setting</button>
+  </div>
+
+
+  <h1 class="title">LCDwifi</h1>
+  <div class="buttons">
+   <button class="button icon ion-plus" ng-click="btnAddDevice()"></button>
+ </div>
+</ion-header-bar>
+
+
+  <ion-content>
+<div>
+  <img style="margin-left:auto;margin-right:auto;display:block;padding:2em;" src="img/iot.png">
+</div>
+    <div class="list">
+      <div class="item item-avatar-left item-icon-right" ng-click="btnDevice(data)" ng-repeat="data in MyDataArray">
+        <img src="img/ionic.png">
+        <h2>{{data.uname}}</h2>
+        <p>{{data.info}}</p>
+        <p>{{data.mcaddr}}</p>
+        <i class="icon ion-chevron-right"></i>
+      </div>
+    </div>
+
+  </ion-content>

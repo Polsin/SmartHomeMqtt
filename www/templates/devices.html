@@ -1,0 +1,95 @@
+<ion-header-bar align-title="center" class="bar-dark">
+   <div class="buttons">
+    <button class="button icon ion-chevron-left" ng-click="back()">back</button>
+  </div>
+  <h1 class="title">{{txtName}}</h1>
+</ion-header-bar>
+
+
+<!-- <img src="img/0.png" class="figures"/> -->
+<!-- <img src="img/0.png" class="figures"/> -->
+
+<ion-content>
+  <ion-toggle ng-model=value ng-change="togglePowerSW()" toggle-class="toggle-positive">Power</ion-toggle>
+<!--
+  <label class="toggle">
+     <input type="checkbox">
+     <div class="track">
+         <div class="handle"></div>
+     </div>
+ </label>
+-->
+  <div style="padding-top: 50px;"></div>
+
+   <div style="margin-left:auto;margin-right:auto;display:block;padding:2em;">
+
+
+
+     <table>
+     <tbody>
+     <tr>
+     <td colspan="2"><div id="roomTemp" style="font-size:100px !important;">00</div></td>
+     <td><div id="setTemp" style="font-size:30px;">00</div></td>
+     </tr>
+     <tr>
+<td colspan="3">&nbsp;</td>
+</tr>
+     <tr>
+     <td><div id="setMode">Mode</div></td>
+     <td><div id="setFan">Fan</div></td>
+     <td><div id="setPower">Power</div></td>
+     </tr>
+     </tbody>
+     </table>
+  </div>
+
+  <ion-list>
+    <div class="item range range-assertive" ng-repeat="device in devices | filter:'thermostat'">
+        <i class="icon ion-ios7-sunny-outline"></i>
+        {{ device.name }}
+        <input type="range" snaps="true" name="volume" min="15" max="31" ng-model="device.value"  ng-change="change(device)">
+        <i class="icon ion-ios7-sunny"></i>
+        {{ device.value }}
+    </div>
+  </ion-list>
+
+<!--
+  <div class="button_center">
+      <button class="button icon ion-gear-a"></button>
+      <button class="button icon ion-gear-a"></button>
+      <button class="button icon ion-gear-a"></button>
+      <button class="button icon ion-gear-a"></button>
+      <button class="button icon ion-gear-a"></button>
+  </div>
+-->
+
+    <div class="button-bar button_center">
+      <a class="button button-positive">Mode</a>
+      <a class="button button-positive">Fan</a>
+      <a class="button button-positive" ng-click="powerSW()">Power</a>
+    </div>
+
+</ion-content>
+<ion-footer-bar align-title="left" class="bar-dark">
+    <!--h1 class="title"><div>{{ rxData.data }}</div></h1-->
+</ion-footer-bar>
+<!--
+<style>
+.range{
+     -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+  i.icon{
+      -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+  }
+}
+</style>
+-->
+
+<style>
+.button_center {
+    padding: 10px;
+}
+</style>
