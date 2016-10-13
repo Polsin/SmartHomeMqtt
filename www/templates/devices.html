@@ -10,7 +10,7 @@
 <!-- <img src="img/0.png" class="figures"/> -->
 
 <ion-content>
-  <ion-toggle ng-model=powerToggle ng-change="togglePowerSW()" ng-checked="false" toggle-class="toggle-green">Power</ion-toggle>
+  <ion-toggle ng-model="powerToggle" ng-change="togglePowerSW()" ng-checked="false" toggle-class="toggle-green">Power</ion-toggle>
 
 
 
@@ -69,8 +69,8 @@
 
     <div class="button-bar button_center">
       <a class="button button-positive" ng-click="modeSW()">Mode</a>
-      <a class="button button-positive">Fan</a>
-      <a class="button button-positive" ng-click="powerSW()">Power</a>
+      <a class="button button-positive" ng-click="fanSW()">Fan</a>
+
     </div>
 
 </ion-content>
