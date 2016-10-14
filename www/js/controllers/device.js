@@ -7,15 +7,15 @@ angular.module('homepi.device', [])
 
 $scope.togglePowerSW = function() {
     if($scope.powerToggle == true) {
-      $scope.powerToggle = false;
       Socket.publish('/query/device/18FE34DAF3F1/app/AABBCCDDEEFF','<18FE34DAF3F1FF00010201010000F4>');
       console.log('sent = <18FE34DAF3F1FF00010201010000F4>');
       $scope.txDataSend.data = 'sent = '+'<18FE34DAF3F1FF00010201010000F4>';
+      $scope.powerToggle = false;
     }else{
-      $scope.powerToggle = true;
       Socket.publish('/query/device/18FE34DAF3F1/app/AABBCCDDEEFF','<18FE34DAF3F1FF00010201010001F3>');
       console.log('sent = <18FE34DAF3F1FF00010201010001F3>');
       $scope.txDataSend.data = 'sent = '+'<18FE34DAF3F1FF00010201010001F3>';
+      $scope.powerToggle = true;
     }
     console.log('testToggle changed to '+$scope.powerToggle);
 
@@ -120,10 +120,10 @@ $scope.fanSW = function() {
         $scope.hexString1 = setTemp.toString(16).toUpperCase();
         $scope.hexString1 = ("0" + $scope.hexString1).slice(-2);
 
-        //var power = 1;
-        //if($scope.powerToggle == false){
-        //power = 0 ;
-        //}
+        var power = 1;
+        if($scope.powerToggle == false){
+        power = 0 ;
+        }
 
         $scope.hexString2 = power.toString(16).toUpperCase();
         $scope.hexString2 = ("0" + $scope.hexString2).slice(-2);
@@ -141,7 +141,7 @@ $scope.fanSW = function() {
             console.log('sent0 = '+$scope.txData);
             $scope.txDataSend.data = 'sent0 = '+$scope.txData;
         }
-        
+
     }
 
 
